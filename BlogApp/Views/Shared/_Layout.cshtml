@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BlogApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BlogApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm mb-3">
+            <div class="container">
+                <a class="navbar-brand text-black" href="/posts">
+                    <i class="bi bi-code"></i> BlogApp
+                </a>
+
+
+                 <ul class="navbar-nav ms-auto">
+                     @if(User.Identity!.IsAuthenticated)
+                    {
+                            <li class="nav-item">
+                                    <a href="/posts/CreatePost" class="nav-link text-success"><i class="bi bi-plus"></i> Post EKle</a>
+                            </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link"><i class="bi bi-person"></i> @User.Identity!.Name</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/user/logout" class="btn btn-danger text-white"><i class="bi bi-box-arrow-in-Left"></i> Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item me-3">
+                            <a href="/user/login" class="nav-link text-primary"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a href="/user/usercreate" class="nav-link text-success"><i class="bi bi-person-add"></i> Register</a>
+                        </li>
+                    }
+                    
+                </ul> 
+            </div>
+        </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - BlogApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

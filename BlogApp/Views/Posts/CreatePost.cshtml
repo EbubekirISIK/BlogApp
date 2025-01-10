@@ -1,0 +1,59 @@
+﻿@model CreatePostViewModel
+<div class="container-fluid m-4">
+    <h2>Create a New Post</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <!-- Title -->
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Post Title</label>
+            <input asp-for="Title" class="form-control" placeholder="Enter the post title">
+        </div>
+
+        <!-- Content -->
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <input asp-for="Description" class="form-control" placeholder="Enter the post content" />
+        </div>
+        <!--img-->
+        <div class="input-group mb-3">
+            <input type="file" asp-for="Images" class="form-control" />
+        </div>
+        <!-- URL -->
+        <div class="mb-3">
+            <label asp-for="Url" class="form-label">Url</label>
+            <input asp-for="Url" class="form-control" placeholder="Enter the post url" />
+        </div>
+
+        <!--Tag-->
+        @foreach (var item in Model.Tags)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedTagIds" value="@item.TagId" id="@item.TagId"
+                @(Model.Tags.Any(i => i.TagId == item.TagId) ? "" : "checked") />
+                <label class="form-check-label" for="@item.TagId">
+                    @item.Text
+                </label>
+            </div>
+        }
+       
+       
+        <!-- Description -->
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label">Post Content</label>
+            <textarea asp-for="Content" class="form-control" placeholder="Write the content here"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit Post</button>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.6.0/tinymce.min.js" integrity="sha512-/4EpSbZW47rO/cUIb0AMRs/xWwE8pyOLf8eiDWQ6sQash5RP1Cl8Zi2aqa4QEufjeqnzTK8CLZWX7J5ZjLcc1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        tinymce.init({
+            selector: '#Content'
+        })
+    </script>
+}

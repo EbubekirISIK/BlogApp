@@ -1,0 +1,80 @@
+﻿@using BlogApp.Entity
+@model Post
+<div class="row">
+    <div class="col-lg-8">
+        <div class="bg-white p-4 mb-5">
+            <h1 class="h4 mb-4">Popular Posts</h1>
+            @foreach (var item in Model.Tags)
+            {
+                    <a href="/posts/tag/@item.Url" class="badge bg-@item.Color bg-opacity-10 text-@item.Color mb-2 fw-bold">@item.Text</a>
+            }
+
+            <div class="card bg-transparent border-0 mb-3">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="~/img/@Model.Images" class="img-fluid rounded" />
+                    </div>
+                    <div class="col-8">
+                        <h5><a href="#" class="btn-link fw-bold">@Model.Title</a></h5>
+                        <p>@Html.Raw(@Model.Content)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex mb-2">
+                <div class="small text-muted m-1">@Model.PublishesOn.ToString("dd MMM yyyy HH:mm")</div>
+                <div class="m-1"><a href="/user/profil/@Model.User.UserName"><i class="bi bi-person-circle"></i> @Model.User.UserName</a></div>
+                    
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span>@Model.Comments.Count() Adet Yorum</span>
+            </div>
+            <div class="card-body">
+                @foreach (var yorum in Model.Comments)
+                {
+                        <div class="d-flex mb-3">
+                            <!-- Kullanıcı Resmi -->
+                            <img src="~/img/@yorum.User.Images" alt="User" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+
+                            <!-- Kullanıcı Adı ve Yorum -->
+                            <div>
+                                <h6 class="mb-1"><a href="/user/profil/@yorum.User.UserName">@yorum.User.UserName</a></h6>
+                                <p class="small text-muted">@yorum.PublishedOn.ToString("dd MMM yyyy HH:mm")</p>
+                                <p>@yorum.CommentText</p>
+                            </div>
+                        </div>
+                        <hr>
+                }
+            </div>
+            <div class="card-footer">
+                @if (User.Identity!.IsAuthenticated)
+                {
+                        <h5 class="text-opacity-25">Yorum Yaz</h5>
+                        <form method="post" asp-controller="Posts" asp-action="AddComment">
+                            <input type="hidden" name="PostId" value="@Model.PostId" />
+                            <input type="hidden" name="Url" value="@Model.Url" />
+
+                            <div class="mb-3">
+                                <textarea class="form-control" name="CommentText" rows="3" placeholder="Yorumunuz" required></textarea>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Yorumu Gönder</button>
+                            </div>
+                        </form>
+                }
+                else
+                {
+                        <p>Yorum yapmak için uygulamaya giriş yapınız. <a href="/user/login">Login</a></p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <vc:tags-menu></vc:tags-menu>
+        <vc:new-posts></vc:new-posts>
+    </div>
+</div>

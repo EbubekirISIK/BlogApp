@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model UserCreateViewModel
+
+<div class="container-fluid bg-white p-4">
+    <h3>Kayıt Formu</h3>
+    <hr class="my-3" />
+    <form method="post" asp-action="UserCreate">
+       
+        <label asp-for="UserName" class="form-label">Kullanıcı Adı</label>
+        <div class="input-group mb-3">
+
+            <span class="input-group-text" asp-for="UserName"><i class="bi bi-person-video2"></i></span>
+            <input asp-for="UserName" class="form-control" />
+        </div>
+        <label asp-for="Name" class="form-label">İsim Soyisim</label>
+        <div class="input-group mb-3">
+
+            <span class="input-group-text" asp-for="Name"><i class="bi bi-person"></i></span>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <label asp-for="Email" class="form-label">Email</label>
+        <div class="input-group mb-3">
+
+            <span class="input-group-text" asp-for="Email"><i class="bi bi-envelope"></i></span>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <label asp-for="Password" class="form-label">Şifre</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" asp-for="Password"><i class="bi bi-key"></i></span>
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <label asp-for="ConfirmPassword" class="form-label">Şifre Tekrar</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" asp-for="ConfirmPassword"><i class="bi bi-key"></i></span>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+        <span class="text-danger" asp-validation-summary="all"></span>
+    </form>
+</div>

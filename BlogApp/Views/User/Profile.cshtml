@@ -1,0 +1,41 @@
+﻿@using BlogApp.Entity
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Post>
+
+<div>
+    <table class="table table-responsive table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Images</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>PublishesOn</th>
+                <th>IsActive</th>
+                <th>User</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>@post.PostId</td>
+                    <td><img src="~/img/@post.Images" width="75px" height="75px"/></td>
+                    <td>@post.Title</td>
+                    <td>@post.Description</td>
+                    <td>@post.PublishesOn</td>
+                    <td>@post.IsActive</td>
+                    <td>@post.User.UserName</td>
+                    <td>
+                        <a href="">Edit</a>
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
