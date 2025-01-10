@@ -48,4 +48,5 @@ Bu proje, kullanıcıların üye olup blog yazıları paylaşabildiği bir **Blo
 - **Hesabı Olmayan Kişinin Ana Sayfası**
 <img src="BlogApp/wwwroot/img/ekranGoruntusu/8.png" alt="Uygulama Ekran Görüntüsü"/>
 
-
+- **Kullanıcının Tüm Blogları**
+<img src="BlogApp/wwwroot/img/ekranGoruntusu/Ekran görüntüsü 2025-01-10 163628.png" alt="Uygulama Ekran Görüntüsü"/>
